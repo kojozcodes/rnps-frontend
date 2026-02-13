@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Production build
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Testing
+coverage/
+
+# Misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+
+# Vercel
+.vercel

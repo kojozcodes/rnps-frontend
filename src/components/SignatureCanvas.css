@@ -1,0 +1,82 @@
+/**
+ * Signature Canvas Styles
+ * FIX #4: touch-action: none prevents scroll interference
+ * Allows full freedom of movement (vertical + horizontal)
+ */
+
+.signature-container {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.signature-canvas {
+  width: 100%;
+  height: 200px;
+  border: 2px solid #003DA5;
+  border-radius: 12px;
+  background-color: white;
+  cursor: crosshair;
+  
+  /* FIX #4: Prevent scroll/zoom during signature drawing */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.signature-canvas:active {
+  cursor: crosshair;
+}
+
+/* Placeholder text when empty (shown via canvas drawing) */
+.signature-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #999;
+  font-size: 16px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Clear button */
+.clear-signature-btn {
+  margin-top: 12px;
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: block;
+  margin-left: auto;
+}
+
+.clear-signature-btn:hover {
+  background-color: #f57c00;
+}
+
+.clear-signature-btn:active {
+  background-color: #e65100;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .signature-canvas {
+    height: 180px;
+  }
+
+  .clear-signature-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .signature-canvas {
+    height: 150px;
+  }
+}
