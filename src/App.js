@@ -5,6 +5,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import './App.css';
 import SignatureCanvas from './components/SignatureCanvas';
 import Login from './components/Login';
@@ -112,7 +113,7 @@ function App() {
       // Check - but enforce max 3 limit
       const selectedCount = Object.keys(newSelections).length;
       if (selectedCount >= 3) {
-        alert('You can only select up to 3 items.');
+        toast.error('You can only select up to 3 items.');
         return;
       }
       newSelections[code] = { checked: true, serial: '' };
@@ -155,7 +156,7 @@ function App() {
   const generatePDF = async () => {
     const errors = validateForm();
     if (errors.length > 0) {
-      alert('Please fix the following errors:\n\n• ' + errors.join('\n• '));
+      toast.error('Please fix the following errors:\n\n• ' + errors.join('\n• '));
       return;
     }
 
@@ -199,7 +200,7 @@ function App() {
         // Check if token expired
         if (response.status === 401) {
           handleLogout();
-          alert('Session expired. Please login again.');
+          toast.error('Session expired. Please login again.');
           return;
         }
         const error = await response.json();
@@ -222,11 +223,11 @@ function App() {
       document.body.removeChild(a);
       window.URL.revokeObjectURL(url);
 
-      alert('RNPS Record Sheet PDF generated successfully!');
+      toast.success('RNPS Record Sheet PDF generated successfully!');
 
     } catch (error) {
       console.error('PDF generation error:', error);
-      alert(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -257,6 +258,7 @@ function App() {
 
   return (
     <div className="app">
+      <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#333', color: '#fff', borderRadius: '8px' }, success: { duration: 3000, iconTheme: { primary: '#52C41A', secondary: '#fff' } }, error: { duration: 4000 } }} />
       {/* Header */}
       <header className="header">
         <img src="/logo.png" alt="Logo" className="logo" />
