@@ -26,10 +26,11 @@ const SignatureCanvas = forwardRef((props, ref) => {
     // Resize canvas
     const resizeCanvas = () => {
       const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      const data = signaturePad.toData(); // Save strokes before resize
       canvas.width = canvas.offsetWidth * ratio;
       canvas.height = canvas.offsetHeight * ratio;
       canvas.getContext('2d').scale(ratio, ratio);
-      signaturePad.clear(); // Clear after resize
+      signaturePad.fromData(data); // Restore strokes after resize
     };
 
     resizeCanvas();
